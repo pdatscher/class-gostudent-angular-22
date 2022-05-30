@@ -1,0 +1,32 @@
+<div class="ui grid" *ngIf="offer">
+  <button (click)="showOfferList()" class="ui grey button">Zurück zur Übersicht</button>
+  <div class="four wide column">
+    <!--<img class="ui large image" *ngIf="book.images && book.images[0]"
+         [src]="book.images[0].url">-->
+  </div>
+  <div class="twelve wide column">
+    <h1 class="ui header">{{ offer.headline }}</h1>
+    <h3 class="ui header">{{ offer.subject }}</h3>
+    <div class="ui divider"></div>
+    <div class="ui grid">
+      <div class="four wide column">
+        <h4 class="ui header">Tutor</h4>
+        {{ offer.user_id }}
+      </div>
+      <div class="four wide column">
+        <h4 class="ui header">ID</h4>
+        {{ offer.id }}
+      </div>
+    </div>
+  </div>
+  <div class="sixteen wide column">
+    <h3 class="ui header">Beschreibung</h3>
+    {{ offer.description }}
+  </div>
+  <div class="sixteen wide column">
+
+  </div>
+</div>
+
+
+

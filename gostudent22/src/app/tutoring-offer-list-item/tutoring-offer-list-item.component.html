@@ -1,0 +1,16 @@
+<!--
+    <img class="ui tiny image"
+    *ngIf="offer.images"
+    [src]="offer.images[0].url">-->
+
+<div class="content" *ngIf="offer">
+  <div class="header">{{ offer?.headline }}</div>
+  <div class="sub">{{ offer?.subject }}</div>
+  <div class="description">{{ offer?.description }}</div>
+  <div class="metadata">
+    <div class="user">{{ offer?.user_id }}</div>
+    <span *ngFor="let date of offer?.dates; last as l">
+          {{ date.day }} {{ date.time }}<span *ngIf="!1">,</span>
+        </span>
+  </div>
+</div>

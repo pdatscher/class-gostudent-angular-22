@@ -1,0 +1,6 @@
+<div class="ui container">
+  <div class="ui middle aligned selection divided list">
+    <a *ngFor="let offer of offers" class="item bs-tutoring-offer-list-item"
+    [offer]="offer" (click)="showDetails(offer)"></a>
+  </div>
+</div>
