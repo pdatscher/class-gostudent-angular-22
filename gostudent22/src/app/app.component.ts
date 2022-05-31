@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
+import { AuthenticationService } from "./shared/authentication.service";
 import { Tutoringoffer } from "./shared/tutoringoffer";
+import { BookedTutoring} from "./shared/booked-tutoring";
+import { BookedTutoringsListComponent} from "./booked-tutorings-list/booked-tutorings-list.component";
 
 @Component({
   selector: 'bs-root',
@@ -10,7 +13,7 @@ export class AppComponent {
   detailsOn = false;
   offer : Tutoringoffer | undefined;
 
-  showList() {
+  /*showList() {
     this.listOn = true;
     this.detailsOn = false;
   }
@@ -19,8 +22,16 @@ export class AppComponent {
     this.offer = offer;
     this.listOn = false;
     this.detailsOn = true;
+  }*/
+  constructor (public authService: AuthenticationService) {}
+
+  isLoggedIn() {
+    return this.authService.isLoggedIn();
   }
 
+  getLoginLabel() {
+    return this.isLoggedIn() ? "Log Out" : "Log In";
+  }
 
 
   title = 'gostudent22';

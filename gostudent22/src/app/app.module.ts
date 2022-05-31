@@ -14,6 +14,10 @@ import { TutorDetailsComponent } from './tutor-details/tutor-details.component';
 import { SearchComponent } from './search/search.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NewofferFormComponent } from './newoffer-form/newoffer-form.component';
+import { LoginComponent } from './login/login.component';
+import {BookedTutoringsListComponent} from "./booked-tutorings-list/booked-tutorings-list.component";
+import {BookedTutoringsListItemComponent} from "./booked-tutorings-list-item/booked-tutorings-list-item.component";
+import {AuthenticationService} from "./shared/authentication.service";
 
 
 @NgModule({
@@ -26,14 +30,17 @@ import { NewofferFormComponent } from './newoffer-form/newoffer-form.component';
     TutorListComponent,
     TutorListItemComponent,
     TutorDetailsComponent,
+    BookedTutoringsListComponent,
+    BookedTutoringsListItemComponent,
     SearchComponent,
-    NewofferFormComponent
+    NewofferFormComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule, AppRoutingModule, HttpClientModule, ReactiveFormsModule, FormsModule
   ],
   exports: [FormsModule, ReactiveFormsModule],
-  providers: [GoStudentServiceService],
+  providers: [GoStudentServiceService, AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

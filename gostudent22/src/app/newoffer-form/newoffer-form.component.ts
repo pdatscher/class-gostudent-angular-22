@@ -15,7 +15,7 @@ import {ErrorMessage, ErrorMessages} from "./newoffer-form-error-messages";
 })
 export class NewofferFormComponent implements OnInit {
 
-  newofferForm: FormGroup;
+  newofferForm: FormGroup = new FormGroup({});
 
   offer = OfferFactory.empty();
   errors: { [key: string]: string } = {} // leeres assoziatives Array
@@ -28,8 +28,7 @@ export class NewofferFormComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {
-
-    this.newofferForm = this.fb.group({})
+    this.initBook()
   }
 
   ngOnInit(): void {
@@ -37,8 +36,10 @@ export class NewofferFormComponent implements OnInit {
     if (id) {
       this.isUpdatingOffer = true;
       this.gs.getSingle(id).subscribe(offer => {
+
         this.offer = offer;
         this.initBook();
+        this.buildDatesArray();
       });
     }else{
       this.initBook();
@@ -50,6 +51,8 @@ export class NewofferFormComponent implements OnInit {
 
   initBook() {
     this.newofferForm = this.fb.group({
+
+
       headline: [this.offer.headline, Validators.required],
       subject: [this.offer.subject, Validators.required],
       description: this.offer.description,
@@ -79,7 +82,7 @@ export class NewofferFormComponent implements OnInit {
 
     for (const message of ErrorMessages) {
       const control = this.newofferForm.get(message.forControl);
-      console.log(control);
+
       if (
         control &&
         control.dirty &&
@@ -90,7 +93,7 @@ export class NewofferFormComponent implements OnInit {
         this.errors[message.forControl] = message.text;
       }
     }
-    console.log(this.errors);
+
   }
 
   buildDatesArray() {
@@ -99,10 +102,13 @@ export class NewofferFormComponent implements OnInit {
       for (let date of this.offer.dates) {
         let fg = this.fb.group({
           day: new FormControl(date.day, [Validators.required]),
-          title: new FormControl(date.time, [Validators.required])
+          time: new FormControl(date.time, [Validators.required])
         });
         this.dates.push(fg);
       }
+    }
+    if(this.dates.length===0){
+      this.addDateControl()
     }
   }
 

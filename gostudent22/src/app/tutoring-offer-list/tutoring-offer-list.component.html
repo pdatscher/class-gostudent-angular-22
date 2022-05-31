@@ -3,9 +3,7 @@
 
   <div class="ui middle aligned selection divided list">
     <a *ngFor="let offer of offers" class="item bs-tutoring-offer-list-item"
-    [offer]="offer"
-
-    ></a>
+       [offer]="offer" [routerLink]="[offer.id]"></a>
 
     <!-- [routerLink]="offer.id"
 
