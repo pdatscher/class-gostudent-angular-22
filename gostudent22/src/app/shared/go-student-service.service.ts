@@ -1,14 +1,22 @@
 import { Injectable } from '@angular/core';
 import {Dates, Tutoringoffer} from "./tutoringoffer";
+import {HttpClient} from "@angular/common/http";
+import {Observable, throwError} from "rxjs";
+import { catchError, retry } from "rxjs/operators";
+import {Tutor} from "./tutor";
 
 @Injectable({
   providedIn: 'root'
 })
 export class GoStudentServiceService {
 
-  offers : Tutoringoffer[];
+  //offers : Tutoringoffer[];
 
-  constructor() {
+  //HARDCODIERT - SOLLTE IN CONFIG (.env)
+  private api = "http://gostudent22.s1910456005.student.kwmhgb.at/api";
+
+  constructor(private http: HttpClient) {
+    /*
     this.offers = [
 
       new Tutoringoffer(
@@ -30,11 +38,50 @@ export class GoStudentServiceService {
       )
     ];
 
-    console.log(this.offers);
+    console.log(this.offers);*/
   }
 
-  getAll(){
-    return this.offers;
+  getAll() : Observable<Array<Tutoringoffer>> {
+    //return this.offers;
+    return this.http.get<Array<Tutoringoffer>>(`${this.api}/tutoringoffers`).pipe(retry(3)).pipe(catchError(this.errorHandler));
+  }
+
+  getSingle(id: number) : Observable<Tutoringoffer> {
+    return this.http.get<Tutoringoffer>(`${this.api}/tutoringoffers/${id}`).pipe(retry(3)).pipe(catchError(this.errorHandler));
+    //return <Tutoringoffer>this.offers.find(offer => offer.id === id);
+  }
+
+  remove(id: number): Observable<any> {
+    return this.http.delete(`${this.api}/tutoringoffers/${id}`).pipe(retry(3)).pipe(catchError(this.errorHandler));
+  }
+
+  /*check(id: number) : Observable<Boolean> {
+    return this.http.get<Boolean>(`${this.api}/tutoringoffers/${id}`).pipe(retry(3)).pipe(catchError(this.errorHandler));
+  }*/
+
+  searchSubject(searchTerm:string): Observable<Array<Tutoringoffer>> {
+    return this.http.get<Tutoringoffer>(`${this.api}/tutoringoffers/search/${searchTerm}`).pipe(retry(3)).pipe(catchError(this.errorHandler));
+  }
+
+  update(offer: Tutoringoffer) : Observable<any> {
+    return this.http.put(`${this.api}/tutoringoffers/${offer.id}`, offer).pipe(retry(3)).pipe(catchError(this.errorHandler));
+  }
+
+  create(offer: Tutoringoffer) : Observable<any> {
+    return this.http.post(`${this.api}/tutoringoffers`, offer).pipe(retry(3)).pipe(catchError(this.errorHandler));
+  }
+
+  getAllTutors() : Observable<Array<Tutor>> {
+    return this.http.get<Array<Tutor>>(`${this.api}/users`).pipe(retry(3)).pipe(catchError(this.errorHandler));
+  }
+
+  getSingleTutor(id: number) : Observable<Tutor> {
+    return this.http.get<Tutor>(`${this.api}/users/${id}`).pipe(retry(3)).pipe(catchError(this.errorHandler));
+  }
+
+  // LIEFERT EIN EVENT WENN ES PROBLEM MIT REST SERVICE GIBT
+  private errorHandler(error: Error |any) : Observable<any> {
+    return throwError(() => new Error(error));
   }
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {Dates, Tutoringoffer} from "../shared/tutoringoffer";
 import {GoStudentServiceService} from "../shared/go-student-service.service";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'bs-tutoring-offer-list',
@@ -10,20 +11,26 @@ import {GoStudentServiceService} from "../shared/go-student-service.service";
 })
 export class TutoringOfferListComponent implements OnInit {
 
+
   offers: Tutoringoffer[] = [];
 
   @Output() showDetailsEvent = new EventEmitter<Tutoringoffer>();
 
-  constructor(private gs: GoStudentServiceService) { }
+  constructor(private gs: GoStudentServiceService, private router: Router, private route:ActivatedRoute) { }
 
   ngOnInit() : void {
-  this.offers = this.gs.getAll();
+    //ÜBER RXJS-DATENSTROM ITERIEREN -> SUBSCRIBE METHODE
+  this.gs.getAll().subscribe(res => this.offers = res);
   console.log(this.offers);
   }
 
   showDetails(offer : Tutoringoffer) {
     console.log(offer);
     this.showDetailsEvent.emit(offer);
+  }
+
+  offerSelected(offer: Tutoringoffer) {
+    this.router.navigate(['../offers', offer.id], { relativeTo: this.route });
   }
 
 }

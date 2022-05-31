@@ -3,11 +3,7 @@ import { Tutoringoffer } from "./shared/tutoringoffer";
 
 @Component({
   selector: 'bs-root',
-  //templateUrl: './app.component.html',
-  template: `
-    <bs-tutoring-offer-list (showDetailsEvent)="showDetails($event)" *ngIf="listOn"></bs-tutoring-offer-list>
-    <bs-tutoring-offer-details (showListEvent)="showList()" *ngIf="detailsOn" [offer]="offer"></bs-tutoring-offer-details>
-    `
+  templateUrl: './app.component.html'
 })
 export class AppComponent {
   listOn = true;

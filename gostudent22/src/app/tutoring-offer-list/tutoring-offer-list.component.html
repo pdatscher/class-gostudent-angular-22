@@ -1,6 +1,26 @@
 <div class="ui container">
+  <bs-search class="column" (offerSelected)="offerSelected($event)"></bs-search>
+
   <div class="ui middle aligned selection divided list">
     <a *ngFor="let offer of offers" class="item bs-tutoring-offer-list-item"
-    [offer]="offer" (click)="showDetails(offer)"></a>
+    [offer]="offer"
+
+    ></a>
+
+    <!-- [routerLink]="offer.id"
+
+ TODO ROUTER LINK EINFÜGEN DAMIT VERLINKUNG AUF DETAILANSICHT KLAPPT-->
+
+    <div *ngIf="offers && !offers.length" class="ui active dimmer">
+      <div class="ui large text loader">
+        Angebote werden geladen.
+      </div>
+      <p>Momentan keine Angebote verfügbar.</p>
+    </div>
+
+
   </div>
+
 </div>
+
+

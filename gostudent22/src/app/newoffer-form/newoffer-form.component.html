@@ -1,0 +1,51 @@
+<h1>Neues Nachhilfe Angebot anlegen</h1>
+
+<form class="ui large form" [formGroup]="newofferForm" (ngSubmit)="submitForm()">
+
+  <div class="field">
+    <label>Titel</label>
+    <input formControlName="headline">
+    <div *ngIf="errors['headline']" class="ui negative message"> {{ errors['headline'] }}</div>
+  </div>
+
+  <div class="field">
+    <label>Unterrichtsfach</label>
+    <input formControlName="subject">
+    <div *ngIf="errors['subject']" class="ui negative message"> {{ errors['subject'] }}</div>
+  </div>
+
+  <div class="field">
+    <label>User_ID</label>
+    <input formControlName="user_id">
+  </div>
+
+  <div class="field">
+    <label>Beschreibung</label>
+    <textarea formControlName="description" rows="3"></textarea>
+  </div>
+
+ <div class="field">
+    <label>Termine hinzufügen</label>
+    <div formArrayName="dates">
+      <ng-container *ngFor="let newDateGroup of getDateControls(); index as i; last as l">
+        <div class="fields" [formGroup]="newDateGroup">
+          <div class="nine wide field">
+            <input type="date" formControlName="day">
+          </div>
+          <div class="six wide field">
+            <input type="time" formControlName="time">
+          </div>
+          <div class="one wide field" *ngIf="l">
+            <button (click)="addDateControl()" class="ui large button" type="button">+</button>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+
+  </div>
+
+  <button type="submit" class="ui button" [disabled]="newofferForm.invalid">Speichern</button>
+
+</form>
+

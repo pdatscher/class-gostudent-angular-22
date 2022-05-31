@@ -1,0 +1,23 @@
+<div class="ui container center aligned">
+
+  <div class="ui title">Bestimmtes Fach gesucht?</div>
+  <div class="ui search" [ngClass]="{loading: isLoading}">
+    <div class="ui icon input">
+  <input type="text" placeholder="Suche ..."
+    (keyup)="keyup.emit(searchTerm.value)" #searchTerm class="prompt"
+  ><i class="search icon"></i></div>
+    <div class="ui container center aligned">
+    <div class="results transition" [ngClass]="{visible: foundOffers.length}">
+
+      <a href (click)="offerSelected.emit(offer); false" class="result"
+         *ngFor="let offer of foundOffers">
+        <div class="content">
+          <div class="title">{{ offer.headline }}</div>
+          <div class="sub">{{ offer.subject }}</div>
+        </div>
+      </a>
+    </div>
+    </div>
+
+  </div>
+</div>

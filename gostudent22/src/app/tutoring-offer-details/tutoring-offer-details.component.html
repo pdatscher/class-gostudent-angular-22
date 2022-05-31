@@ -1,5 +1,6 @@
-<div class="ui grid" *ngIf="offer">
-  <button (click)="showOfferList()" class="ui grey button">Zurück zur Übersicht</button>
+<div class="ui container" *ngIf="offer">
+  <button [routerLink]="'/offers'" class="ui grey button">Zurück zur Übersicht</button>
+
   <div class="four wide column">
     <!--<img class="ui large image" *ngIf="book.images && book.images[0]"
          [src]="book.images[0].url">-->
@@ -26,7 +27,19 @@
   <div class="sixteen wide column">
 
   </div>
+
+  <button class="ui tiny red labeled icon button" (click)="removeOffer()">
+    <i class="remove icon"></i>
+    löschen
+  </button>
+
+  <a class="ui tiny yellow labeled icon button" [routerLink]="['../../admin', offer?.id]">
+    <i class="edit icon"></i>
+    bearbeiten
+  </a>
+
 </div>
+
 
 
 
