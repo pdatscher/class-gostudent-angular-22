@@ -5,7 +5,7 @@ export class TutorFactory {
 
 
   static empty() : Tutor {
-    return new Tutor(0,'','', '',1);
+    return new Tutor(0,'','', '','',0,[{id:0, url:'', title:''}] );
   }
 
   static fromObject (rawTutor : any) : Tutor{
@@ -13,8 +13,10 @@ export class TutorFactory {
       rawTutor.id,
       rawTutor.name,
       rawTutor.email,
+      rawTutor.skills,
       rawTutor.password,
       rawTutor.isTutor,
+      rawTutor.images,
     );
 
   }

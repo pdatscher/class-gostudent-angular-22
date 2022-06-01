@@ -1,6 +1,7 @@
 <div class="ui container">
   <bs-search class="column" (offerSelected)="offerSelected($event)"></bs-search>
 
+  <a *ngIf="authService.isLoggedIn()" routerLink="../admin" class="ui grey button">Neues Angebot anlegen</a>
   <div class="ui middle aligned selection divided list">
     <a *ngFor="let offer of offers" class="item bs-tutoring-offer-list-item"
        [offer]="offer" [routerLink]="[offer.id]"></a>

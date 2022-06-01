@@ -27,16 +27,27 @@
   <div class="sixteen wide column">
 
   </div>
+  <ng-container *ngIf="authService.isLoggedIn()" routerLink="../admin">
+    <button class="ui tiny red labeled icon button" (click)="removeOffer()">
+      <i class="remove icon"></i>
+      löschen
+    </button>
 
-  <button class="ui tiny red labeled icon button" (click)="removeOffer()">
-    <i class="remove icon"></i>
-    löschen
-  </button>
+    <a class="ui tiny yellow labeled icon button" [routerLink]="['../../admin', offer?.id]">
+      <i class="edit icon"></i>
+      bearbeiten
+    </a>
+  </ng-container>
 
-  <a class="ui tiny yellow labeled icon button" [routerLink]="['../../admin', offer?.id]">
-    <i class="edit icon"></i>
-    bearbeiten
-  </a>
+  <ng-container *nfIf="authService.isCurrentUserTutor()">
+    <span *ngFor="let date of offer?.dates; last as l">
+      <div class="ui tiny grey labeled icon button">
+        <!--(click)="makeBooking()-->
+        <i class="calendar icon"></i>{{ date.day }} {{ date.time }}
+      </div>
+    </span>
+  </ng-container>
+
 
 </div>
 

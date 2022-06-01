@@ -1,5 +1,61 @@
-<div class="content" *ngIf="tutor">
-  <div class="header">{{ tutor?.name }}</div>
-  <div class="sub">{{ tutor?.email }}</div>
-  <!--<div class="description">{{ offer?.description }}</div>-->
+<ng-container *ngIf="tutor && tutor.isTutor === 1">
+  <img class="ui tiny image"
+       *ngIf="tutor.images && tutor.images[0]"
+       [src]="tutor.images[0].url">
+  <div class="content">
+    <div class="header">{{ tutor?.name }}</div>
+    <div class="sub">{{ tutor?.email }}</div>
+    <p>Skills: {{ tutor?.skills }}</p>
+  </div>
+</ng-container>
+
+
+<!--<div class="card" *ngIf="tutor && tutor.isTutor === 1">
+  <img class="image"
+       *ngIf="tutor && tutor.images && tutor.images[0]"
+       [src]="tutor.images[0].url"
+  >
+  <div class="content">
+    <a class="header">{{ tutor?.name }}</a>
+    <div class="meta">
+      {{ tutor?.email }}
+    </div>
+    <div class="description">
+      Skills: {{ tutor?.skills }}
+    </div>
+  </div>
 </div>
+
+
+<div class="card" *ngIf="tutor && tutor.isTutor === 1">
+  <img class="image"
+       *ngIf="tutor && tutor.images && tutor.images[0]"
+       [src]="tutor.images[0].url">
+  <div class="content">
+    <a class="header">{{ tutor?.name }}</a>
+    <div class="meta">
+      {{ tutor?.email }}
+    </div>
+    <div class="description">
+      Skills: {{ tutor?.skills }}
+    </div>
+  </div>
+</div>
+
+
+<div class="card" *ngIf="tutor && tutor.isTutor === 1">
+    <img class="image"
+       *ngIf="tutor && tutor.images && tutor.images[0]"
+       [src]="tutor.images[0].url"
+     >
+    <div class="content">
+      <a class="header">{{ tutor?.name }}</a>
+      <div class="meta">
+        {{ tutor?.email }}
+      </div>
+      <div class="description">
+        Skills: {{ tutor?.skills }}
+      </div>
+    </div>
+</div>
+-->

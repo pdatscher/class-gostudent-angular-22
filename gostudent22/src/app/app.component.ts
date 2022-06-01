@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import { AuthenticationService } from "./shared/authentication.service";
 import { Tutoringoffer } from "./shared/tutoringoffer";
+import { Tutor } from "./shared/tutor";
 import { BookedTutoring} from "./shared/booked-tutoring";
 import { BookedTutoringsListComponent} from "./booked-tutorings-list/booked-tutorings-list.component";
 
@@ -29,9 +30,13 @@ export class AppComponent {
     return this.authService.isLoggedIn();
   }
 
-  getLoginLabel() {
-    return this.isLoggedIn() ? "Log Out" : "Log In";
+  logout() {
+    this.authService.logout();
   }
+
+  /*getLoginLabel() {
+    return this.isLoggedIn() ? "Log Out" : "Log In";
+  }*/
 
 
   title = 'gostudent22';

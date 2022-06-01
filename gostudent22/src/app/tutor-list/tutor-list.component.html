@@ -1,13 +1,9 @@
 <div class="ui container">
+
   <div class="ui middle aligned selection divided list">
     <a *ngFor="let tutor of tutors" class="item bs-tutor-list-item"
-       [tutor]="tutor"
+       [tutor]="tutor" [routerLink]="[tutor.id]"></a>
 
-    ></a>
-
-    <!-- [routerLink]="tutor.id"
-
- TODO ROUTER LINK IN A TAG EINFÜGEN DAMIT VERLINKUNG AUF DETAILANSICHT KLAPPT-->
 
     <div *ngIf="tutors && !tutors.length" class="ui active dimmer">
       <div class="ui large text loader">

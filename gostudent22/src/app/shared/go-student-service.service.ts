@@ -81,7 +81,11 @@ export class GoStudentServiceService {
   }
 
   getAllBookings(userId: number): Observable<BookedTutoring[]> {
-    return this.http.get<BookedTutoring[]>(`${this.api}/users/${userId}/bookings`).pipe(retry(3)).pipe(catchError(this.errorHandler))
+    return this.http.get<BookedTutoring[]>(`${this.api}/users/${userId}/bookings`).pipe(retry(3)).pipe(catchError(this.errorHandler));
+  }
+
+  makeBooking(userId: number, dateId: number): Observable<any> {
+    return this.http.put(`${this.api}/users/${userId}/bookings/${dateId}`, dateId).pipe(retry(3)).pipe(catchError(this.errorHandler));
   }
 
   cancelBooking(userId: number, dateId: number): Observable<any> {

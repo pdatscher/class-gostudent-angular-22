@@ -13,7 +13,7 @@ export class OfferFactory {
       rawTutoringOffer.subject,
       rawTutoringOffer.user_id,
       rawTutoringOffer.description,
-      rawTutoringOffer.dates //TODO wie funktioniert das mit Array mit Day und Time
+      rawTutoringOffer.dates
     );
 
   }

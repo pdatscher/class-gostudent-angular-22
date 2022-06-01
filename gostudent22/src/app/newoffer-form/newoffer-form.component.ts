@@ -4,7 +4,6 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {Tutoringoffer} from "../shared/tutoringoffer";
 import {OfferFactory} from "../shared/offer-factory";
 import {GoStudentServiceService} from "../shared/go-student-service.service";
-
 import {ErrorMessage, ErrorMessages} from "./newoffer-form-error-messages";
 
 
@@ -28,7 +27,7 @@ export class NewofferFormComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {
-    this.initBook()
+    this.initOffer()
   }
 
   ngOnInit(): void {
@@ -38,18 +37,18 @@ export class NewofferFormComponent implements OnInit {
       this.gs.getSingle(id).subscribe(offer => {
 
         this.offer = offer;
-        this.initBook();
+        this.initOffer();
         this.buildDatesArray();
       });
     }else{
-      this.initBook();
+      this.initOffer();
       this.addDateControl();
     }
 
   }
 
 
-  initBook() {
+  initOffer() {
     this.newofferForm = this.fb.group({
 
 
@@ -116,6 +115,10 @@ export class NewofferFormComponent implements OnInit {
     this.dates.push(this.fb.group({day: null, time: null}));
   }
 
+  public getCurrentUserId() {
+    return Number.parseInt(<string>sessionStorage.getItem("user_id"));
+  }
+
 
   submitForm() {
     /*this.newofferForm.value.dates = this.newofferForm.value.dates.filter(
@@ -123,6 +126,8 @@ export class NewofferFormComponent implements OnInit {
     );*/
 
     const offer: Tutoringoffer = OfferFactory.fromObject(this.newofferForm.value);
+
+    offer.user_id = this.getCurrentUserId()
 
     if (this.isUpdatingOffer) {
       this.gs.update(offer).subscribe(res => {
@@ -138,7 +143,7 @@ export class NewofferFormComponent implements OnInit {
         this.router.navigate(["../offers"], {relativeTo: this.route});
 
       });
-      //todo: save book
+      //todo: save offer
     }
 
   }

@@ -7,6 +7,7 @@ import { TutorListComponent } from "./tutor-list/tutor-list.component";
 import {NewofferFormComponent} from "./newoffer-form/newoffer-form.component";
 import {LoginComponent} from "./login/login.component";
 import {BookedTutoringsListComponent} from "./booked-tutorings-list/booked-tutorings-list.component";
+import {AppComponent} from "./app.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -14,11 +15,13 @@ const routes: Routes = [
   { path: 'offers', component: TutoringOfferListComponent },
   { path: 'offers/:id', component: TutoringOfferDetailsComponent },
   { path: 'tutors', component: TutorListComponent },
+  { path: 'tutors/:id', component: TutorListComponent },
   { path: 'admin', component: NewofferFormComponent },
   { path: 'admin/:id', component: NewofferFormComponent },
   //{ path: 'admin', component: BookFormComponent, canActivate:[CanNavigateToAdminGuard] },
   //{ path: 'admin/:isbn', component: BookFormComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'logout', component: HomeComponent },
   { path: 'booked', component: BookedTutoringsListComponent}
 ];
 

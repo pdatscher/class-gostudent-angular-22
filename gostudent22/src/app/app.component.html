@@ -2,17 +2,26 @@
   <h1 class="ui h1">KWM GO STUDENT</h1>
 </div>
 
-<div class="ui five item tabs menu">
+<div class="ui inverted menu">
   <a routerLink="home" routerLinkActive="active" class="item">Home</a>
   <a routerLink="offers" routerLinkActive="active" class="item">Nachhilfe-Angebote</a>
   <a routerLink="tutors" routerLinkActive="active" class="item">TutorInnen</a>
-  <a *ngIf="authService.isLoggedIn() " routerLink="admin" routerLinkActive="active" class="item">Admin</a>
-  <!--ADD    && authService.isTutor()    after isLoggedIn -->
-  <a routerLink="login" routerLinkActive="active" class="item">Login</a>
-  <a routerLink="booked" routerLinkActive="active" class="item">Booked</a>
+
+  <!-- BEREICHE JE NACH USER ROLLE -->
+  <a *ngIf=" authService.isLoggedIn() && !authService.isCurrentUserTutor()" routerLink="booked" routerLinkActive="active" class="item">Mein Bereich</a>
+  <a *ngIf="authService.isLoggedIn() && authService.isCurrentUserTutor()" routerLink="admin" routerLinkActive="active" class="item">Admin</a>
+
+  <div class="right menu">
+    <a *ngIf="!authService.isLoggedIn()" routerLink="login" routerLinkActive="active" class="item">Login</a>
+    <a *ngIf="authService.isLoggedIn()" routerLink="logout" routerLinkActive="active" class="item" (click)="logout()">Logout</a>
+  </div>
+
 </div>
 
-<router-outlet></router-outlet>
+<div class="ui container">
+  <router-outlet></router-outlet>
+</div>
+
 
 
 

@@ -3,6 +3,8 @@ import {Tutoringoffer} from "../shared/tutoringoffer";
 import {GoStudentServiceService} from "../shared/go-student-service.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {OfferFactory} from "../shared/offer-factory";
+import {BookedTutoring} from "../shared/booked-tutoring";
+import {AuthenticationService} from "../shared/authentication.service";
 
 @Component({
   selector: 'bs-tutoring-offer-details',
@@ -21,6 +23,7 @@ export class TutoringOfferDetailsComponent implements OnInit {
     private gs: GoStudentServiceService,
     private route: ActivatedRoute,
     private router: Router,
+    public authService: AuthenticationService
   ) { }
 
   ngOnInit(): void {

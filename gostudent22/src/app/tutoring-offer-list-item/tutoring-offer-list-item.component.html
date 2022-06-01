@@ -10,7 +10,10 @@
   <div class="metadata">
     <div class="user">{{ offer?.user_id }}</div>
     <span *ngFor="let date of offer?.dates; last as l">
-          {{ date.day }} {{ date.time }}<span *ngIf="!1">,</span>
+      <div class="ui tiny grey labeled icon button disabled">
+        <i class="calendar icon"></i>{{ date.day }} {{ date.time }}
+      </div>
+          <!--{{ date.day }} {{ date.time }}<span *ngIf="!1">,</span>-->
         </span>
   </div>
 </div>
