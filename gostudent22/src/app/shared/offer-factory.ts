@@ -3,7 +3,7 @@ import {Tutoringoffer} from "./tutoringoffer";
 export class OfferFactory {
 
   static empty() : Tutoringoffer {
-    return new Tutoringoffer(0,'','', 0,'',[{id:0, day: '', time: ''}]);
+    return new Tutoringoffer(0,'','', 0,undefined,'',[{id:0, day: '', time: ''}]);
   }
 
   static fromObject (rawTutoringOffer : any) : Tutoringoffer{

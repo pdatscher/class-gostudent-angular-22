@@ -4,7 +4,6 @@ export {Image} from "./image";
 export class Tutor {
 
   constructor(
-
     public id: number,
     public name: string,
     public email: string,

@@ -40,7 +40,7 @@ export class NewofferFormComponent implements OnInit {
         this.initOffer();
         this.buildDatesArray();
       });
-    }else{
+    } else {
       this.initOffer();
       this.addDateControl();
     }
@@ -71,7 +71,7 @@ export class NewofferFormComponent implements OnInit {
     return this.newofferForm.controls['dates'] as FormArray
   }
 
-  getDateControls(){
+  getDateControls() {
     return this.dates.controls as FormGroup[]
   }
 
@@ -106,7 +106,7 @@ export class NewofferFormComponent implements OnInit {
         this.dates.push(fg);
       }
     }
-    if(this.dates.length===0){
+    if (this.dates.length === 0) {
       this.addDateControl()
     }
   }
@@ -125,7 +125,9 @@ export class NewofferFormComponent implements OnInit {
       (thumbnail: { url: string; }) => thumbnail.url
     );*/
 
-    const offer: Tutoringoffer = OfferFactory.fromObject(this.newofferForm.value);
+    // Merge existing offer with form values
+    const updatedOffer={...this.offer, ...this.newofferForm.value}
+    const offer: Tutoringoffer = OfferFactory.fromObject(updatedOffer);
 
     offer.user_id = this.getCurrentUserId()
 

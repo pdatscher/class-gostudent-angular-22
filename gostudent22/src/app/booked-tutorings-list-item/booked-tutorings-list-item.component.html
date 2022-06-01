@@ -1,0 +1,9 @@
+<div class="content" *ngIf="bookedTutoring">
+  <div class="header">{{ bookedTutoring?.tutoring_offer?.headline }}</div>
+  <span> {{ bookedTutoring?.day }} {{ bookedTutoring?.time }}</span>
+  <button class="ui tiny red labeled icon button" (click)="cancelBooking()">
+    <i class="remove icon"></i>
+    stornieren
+  </button>
+</div>
+

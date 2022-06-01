@@ -12,7 +12,7 @@
     <div class="ui grid">
       <div class="four wide column">
         <h4 class="ui header">Tutor</h4>
-        {{ offer.user_id }}
+        {{ offer.user?.name }}
       </div>
       <div class="four wide column">
         <h4 class="ui header">ID</h4>
@@ -27,7 +27,7 @@
   <div class="sixteen wide column">
 
   </div>
-  <ng-container *ngIf="authService.isLoggedIn()" routerLink="../admin">
+  <ng-container *ngIf="authService.isLoggedIn() && authService.isTutor()">
     <button class="ui tiny red labeled icon button" (click)="removeOffer()">
       <i class="remove icon"></i>
       löschen
@@ -39,12 +39,11 @@
     </a>
   </ng-container>
 
-  <ng-container *nfIf="authService.isCurrentUserTutor()">
-    <span *ngFor="let date of offer?.dates; last as l">
-      <div class="ui tiny grey labeled icon button">
-        <!--(click)="makeBooking()-->
+  <ng-container *ngIf="authService.isLoggedIn() && !authService.isTutor()">
+    <span *ngFor="let date of bookableDates()">
+      <button class="ui tiny grey labeled icon button" [class.green]="isBookedByMe(date)" (click)="makeBooking(date)" [disabled]="isBookedByMe(date)">
         <i class="calendar icon"></i>{{ date.day }} {{ date.time }}
-      </div>
+      </button>
     </span>
   </ng-container>
 

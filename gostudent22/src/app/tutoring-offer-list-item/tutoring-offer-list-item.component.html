@@ -8,9 +8,9 @@
   <div class="sub">{{ offer?.subject }}</div>
   <div class="description">{{ offer?.description }}</div>
   <div class="metadata">
-    <div class="user">{{ offer?.user_id }}</div>
-    <span *ngFor="let date of offer?.dates; last as l">
-      <div class="ui tiny grey labeled icon button disabled">
+    <div class="user">{{ offer?.user?.name }}</div>
+    <span *ngFor="let date of availableDates(); last as l">
+      <div class="ui tiny grey labeled icon button disabled" [class.green]="date.user_id === authService.getCurrentUserId()">
         <i class="calendar icon"></i>{{ date.day }} {{ date.time }}
       </div>
           <!--{{ date.day }} {{ date.time }}<span *ngIf="!1">,</span>-->

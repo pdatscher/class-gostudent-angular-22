@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { AppComponent } from './app.component';
 import { TutoringOfferListComponent } from './tutoring-offer-list/tutoring-offer-list.component';
 import { TutoringOfferListItemComponent } from './tutoring-offer-list-item/tutoring-offer-list-item.component';
@@ -18,6 +18,7 @@ import { LoginComponent } from './login/login.component';
 import {BookedTutoringsListComponent} from "./booked-tutorings-list/booked-tutorings-list.component";
 import {BookedTutoringsListItemComponent} from "./booked-tutorings-list-item/booked-tutorings-list-item.component";
 import {AuthenticationService} from "./shared/authentication.service";
+import {AuthInterceptor} from "./shared/auth.interceptor";
 
 
 @NgModule({
@@ -40,7 +41,11 @@ import {AuthenticationService} from "./shared/authentication.service";
     BrowserModule, AppRoutingModule, HttpClientModule, ReactiveFormsModule, FormsModule
   ],
   exports: [FormsModule, ReactiveFormsModule],
-  providers: [GoStudentServiceService, AuthenticationService],
+  providers: [GoStudentServiceService, AuthenticationService,{
+    provide : HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi   : true,
+  },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,11 @@
+<div class="ui container">
+  <div class="ui middle aligned selection divided list">
+    <div *ngFor="let bookedTutoring of bookedTutorings" class="item">
+      <bs-booked-tutorings-list-item [bookedTutoring]="bookedTutoring"
+                                     (onCancel)="cancelBooking($event)"></bs-booked-tutorings-list-item>
+    </div>
+    <div *ngIf="bookedTutorings.length === 0">
+      <span>Noch keine Buchungen vorhanden</span>
+    </div>
+  </div>
+</div>

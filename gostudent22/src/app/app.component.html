@@ -8,8 +8,11 @@
   <a routerLink="tutors" routerLinkActive="active" class="item">TutorInnen</a>
 
   <!-- BEREICHE JE NACH USER ROLLE -->
-  <a *ngIf=" authService.isLoggedIn() && !authService.isCurrentUserTutor()" routerLink="booked" routerLinkActive="active" class="item">Mein Bereich</a>
-  <a *ngIf="authService.isLoggedIn() && authService.isCurrentUserTutor()" routerLink="admin" routerLinkActive="active" class="item">Admin</a>
+  <a *ngIf="authService.isLoggedIn() && !authService.isTutor()" routerLink="booked" routerLinkActive="active" class="item">Mein Bereich</a>
+  <a *ngIf="authService.isLoggedIn() && authService.isTutor()" routerLink="admin" routerLinkActive="active" class="item">Admin</a>
+  <!--
+  && !authService.isCurrentUserTutor()"
+  && authService.isCurrentUserTutor()"-->
 
   <div class="right menu">
     <a *ngIf="!authService.isLoggedIn()" routerLink="login" routerLinkActive="active" class="item">Login</a>
