@@ -42,6 +42,9 @@ export class TutoringOfferDetailsComponent implements OnInit {
   }*/
 
   bookableDates() {
+    if(this.authService.isTutor()){
+      return this.offer?.dates
+    }
     return this.offer?.dates?.filter(d => !d.user_id ||this.isBookedByMe(d)) || []
   }
 

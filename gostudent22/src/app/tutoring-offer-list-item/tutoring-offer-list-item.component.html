@@ -10,7 +10,7 @@
   <div class="metadata">
     <div class="user">{{ offer?.user?.name }}</div>
     <span *ngFor="let date of availableDates(); last as l">
-      <div class="ui tiny grey labeled icon button disabled" [class.green]="date.user_id === authService.getCurrentUserId()">
+      <div class="ui tiny grey labeled icon button disabled" [class.green]="date.user_id === authService.getCurrentUserId() || (authService.isTutor() && date.user_id)">
         <i class="calendar icon"></i>{{ date.day }} {{ date.time }}
       </div>
           <!--{{ date.day }} {{ date.time }}<span *ngIf="!1">,</span>-->

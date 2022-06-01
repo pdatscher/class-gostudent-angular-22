@@ -19,6 +19,9 @@ export class TutoringOfferListItemComponent implements OnInit {
   }
 
   availableDates() {
+    if(this.authService.isTutor()){
+      return this.offer?.dates
+    }
     return this.offer?.dates?.filter(d => !d.user_id || d.user_id === this.authService.getCurrentUserId())
   }
 

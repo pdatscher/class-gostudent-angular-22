@@ -24,9 +24,19 @@
     <h3 class="ui header">Beschreibung</h3>
     {{ offer.description }}
   </div>
-  <div class="sixteen wide column">
 
-  </div>
+  <ng-container *ngIf="authService.isLoggedIn()">
+    <div>
+    <span *ngFor="let date of bookableDates()">
+      <button class="ui tiny grey labeled icon button"
+              [class.green]="isBookedByMe(date) || (authService.isTutor() && date.user_id)" (click)="makeBooking(date)"
+              [disabled]="isBookedByMe(date) || authService.isTutor()">
+        <i class="calendar icon"></i>{{ date.day }} {{ date.time }}
+      </button>
+    </span>
+    </div>
+  </ng-container>
+  <div class="ui divider"></div>
   <ng-container *ngIf="authService.isLoggedIn() && authService.isTutor()">
     <button class="ui tiny red labeled icon button" (click)="removeOffer()">
       <i class="remove icon"></i>
@@ -39,13 +49,7 @@
     </a>
   </ng-container>
 
-  <ng-container *ngIf="authService.isLoggedIn() && !authService.isTutor()">
-    <span *ngFor="let date of bookableDates()">
-      <button class="ui tiny grey labeled icon button" [class.green]="isBookedByMe(date)" (click)="makeBooking(date)" [disabled]="isBookedByMe(date)">
-        <i class="calendar icon"></i>{{ date.day }} {{ date.time }}
-      </button>
-    </span>
-  </ng-container>
+
 
 
 </div>

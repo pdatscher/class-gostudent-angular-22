@@ -12,6 +12,7 @@ export class OfferFactory {
       rawTutoringOffer.headline,
       rawTutoringOffer.subject,
       rawTutoringOffer.user_id,
+      rawTutoringOffer.user,
       rawTutoringOffer.description,
       rawTutoringOffer.dates
     );

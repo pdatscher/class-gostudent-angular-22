@@ -1,14 +1,10 @@
 <div class="ui container">
   <bs-search class="column" (offerSelected)="offerSelected($event)"></bs-search>
 
-  <a *ngIf="authService.isLoggedIn()" routerLink="../admin" class="ui grey button">Neues Angebot anlegen</a>
+  <a *ngIf="authService.isLoggedIn() && authService.isTutor()" routerLink="../admin" class="ui grey button">Neues Angebot anlegen</a>
   <div class="ui middle aligned selection divided list">
     <a *ngFor="let offer of offers" class="item bs-tutoring-offer-list-item"
        [offer]="offer" [routerLink]="[offer.id]"></a>
-
-    <!-- [routerLink]="offer.id"
-
- TODO ROUTER LINK EINFÜGEN DAMIT VERLINKUNG AUF DETAILANSICHT KLAPPT-->
 
     <div *ngIf="offers && !offers.length" class="ui active dimmer">
       <div class="ui large text loader">

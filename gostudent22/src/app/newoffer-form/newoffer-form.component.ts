@@ -101,7 +101,9 @@ export class NewofferFormComponent implements OnInit {
       for (let date of this.offer.dates) {
         let fg = this.fb.group({
           day: new FormControl(date.day, [Validators.required]),
-          time: new FormControl(date.time, [Validators.required])
+          time: new FormControl(date.time, [Validators.required]),
+          id: new FormControl(date.id),
+          user_id:new FormControl(date.user_id)
         });
         this.dates.push(fg);
       }
@@ -112,13 +114,12 @@ export class NewofferFormComponent implements OnInit {
   }
 
   addDateControl() {
-    this.dates.push(this.fb.group({day: null, time: null}));
+    this.dates.push(this.fb.group({id:null,day: null, time: null,user_id:null}));
   }
 
   public getCurrentUserId() {
     return Number.parseInt(<string>sessionStorage.getItem("user_id"));
   }
-
 
   submitForm() {
     /*this.newofferForm.value.dates = this.newofferForm.value.dates.filter(
@@ -126,9 +127,10 @@ export class NewofferFormComponent implements OnInit {
     );*/
 
     // Merge existing offer with form values
-    const updatedOffer={...this.offer, ...this.newofferForm.value}
-    const offer: Tutoringoffer = OfferFactory.fromObject(updatedOffer);
+    const updatedOffer = {...this.offer, ...this.newofferForm.value}
 
+    const offer: Tutoringoffer = OfferFactory.fromObject(updatedOffer);
+    console.log(offer, updatedOffer)
     offer.user_id = this.getCurrentUserId()
 
     if (this.isUpdatingOffer) {
